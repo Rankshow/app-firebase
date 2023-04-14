@@ -1,29 +1,27 @@
 import {useState, useEffect} from "react";
 import { db } from "./firebase-config";
-import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc, doc, deleteDoc } from "firebase/firestore";
+import CountdownTimer from './CountdownTimer';
 import './App.css';
 
 function App() {
   const [newName, setNewName] = useState("");
-  const [newAge, setAge] = useState(0);
+  const [newAge, setAge] = useState("");
 
   const [ users, setUsers] = useState([]);
   const usersCollectionRef = collection(db, "users");
 
+  const THREE_DAYS_IN_MS = 3 * 24 * 60 * 60 * 1000;
+  const NOW_IN_MS = new Date().getTime();
+
+  const dateTimeAfterThreeDays = NOW_IN_MS + THREE_DAYS_IN_MS;
+
   // create a new user
   const createUser = async () => {
-    await addDoc(usersCollectionRef, { name: newName, age: Number(newAge)})
+    await addDoc(usersCollectionRef, { name: newName, age:(newAge)})
   }
 
-  // update a new user
-  const updateUser = async(id, age) => {
-
-    const userDoc = doc(db, "users", id)
-    const newFields = {age: age + 1}
-    await updateDoc(userDoc, newFields)
-  }
-
-  // Deleted user
+  // This function delete the user question
     const deteUsers = async(id) => {
        const userDoc = doc(db, "users",id)
        await deleteDoc(userDoc)
@@ -39,21 +37,24 @@ function App() {
 
   return (
     <div className="App">
-      <input placeholder="Name..." onChange={(e) => {setNewName(e.target.value)}}/>
-      <input type="number" placeholder="Age..." onChange={(e) => {setAge(e.target.value)}} />
+      <h2>Create a question of your choice</h2>
+      <input placeholder="Enter your question" onChange={(e) => {setNewName(e.target.value)}}/>
 
-      <button onClick={createUser}> Create Users</button>
+      <input type="text" placeholder="Answer..." onChange={(e) => {setAge(e.target.value)}} />
+
+      <button className="btn-users" onClick={createUser}> Create Question</button>
       {
         users.map((user) =>{
           return (
             <div> 
             {" "}
-            <h1>Name: {user.name}</h1>
-            <h2>Name: {user.age}</h2>
-            {/* update user */}
-            <button onClick={() => {updateUser(user.id, user.age)}}> Increase Age</button>
-            {/* delete user */}
-            <button onClick={() => {deteUsers(user.id)}}>Delete</button>
+            <h3>{user.name}</h3>
+            <li>{user.age}</li>
+            <CountdownTimer targetDate={dateTimeAfterThreeDays} />
+
+        
+            {/* Delete Question */}
+            <button className="btn-users" onClick={() => {deteUsers(user.id)}}>Delete</button>
             </div>
           )
         })

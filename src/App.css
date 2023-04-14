@@ -1,5 +1,32 @@
 .App {
   text-align: center;
+  background-color: #764248;
+  max-width: 100%;
+  padding: 200px 0 200px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  max-width: 50%;
+  justify-items: center;
+  padding: 10px;
+  margin: 0 auto;
+
+}
+.btn-users{
+  max-width: 50%;
+  margin: 0 auto;
+  margin-top: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 18px;
+  border: none;
+}
+.btn-users:hover{
+background-color: #233329;
+color: #ffff;
 }
 
 .App-logo {
@@ -22,17 +49,4 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
