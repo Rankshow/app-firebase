@@ -1,5 +1,4 @@
 import React from 'react';
-import "./countdown.css";
 import { useCountdown } from './Timer';
 import DateTimeDisplay from './DateTimeDisplay';
 
