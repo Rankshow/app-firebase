@@ -1,4 +1,5 @@
 import React from 'react';
+import "./countdown.css";
 import { useCountdown } from './Timer';
 import DateTimeDisplay from './DateTimeDisplay';
 
@@ -28,9 +29,7 @@ const ExpiredNotice = () => {
 const ShowCounter = ({seconds}) => {
   return (
     <div className="show-counter">
-        
         <DateTimeDisplay value={seconds} type={'Seconds'} isDanger={false} />
-    
     </div>
   );
 };

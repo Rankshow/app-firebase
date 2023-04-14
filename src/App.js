@@ -16,7 +16,7 @@ function App() {
 
   const dateTimeAfterThreeDays = NOW_IN_MS + THREE_DAYS_IN_MS;
 
-  // create a new user
+  // This function add the user question to the Dom
   const createUser = async () => {
     await addDoc(usersCollectionRef, { name: newName, age:(newAge)})
   }
@@ -26,6 +26,8 @@ function App() {
        const userDoc = doc(db, "users",id)
        await deleteDoc(userDoc)
     }
+
+    // UseEffect hooks
   useEffect(() =>{
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
@@ -35,6 +37,7 @@ function App() {
     getUsers();
   }, [])
 
+  // Rendering to the Dom
   return (
     <div className="App">
       <h2>Create a question of your choice</h2>
@@ -53,7 +56,7 @@ function App() {
             <CountdownTimer targetDate={dateTimeAfterThreeDays} />
 
         
-            {/* Delete Question */}
+            {/*this button Delete Question from the Dom*/}
             <button className="btn-users" onClick={() => {deteUsers(user.id)}}>Delete</button>
             </div>
           )
